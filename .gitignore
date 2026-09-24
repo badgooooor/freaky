@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Secrets
+.env
+*.env
+
+# Data (large files, generated)
+data/raw/
+data/processed/
+data/splits/
+
+# Model checkpoints
+*.pt
+*.ckpt
+checkpoints/
+
+# Notebooks output
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/

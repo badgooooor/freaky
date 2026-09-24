@@ -1,0 +1,21 @@
+[project]
+name = "freaky"
+version = "0.1.0"
+description = "Cursed emoji classifier — Thai/English multilabel, Stupid Hackathon X 2026"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "torch>=2.3",
+    "sentence-transformers>=3.0",
+    "scikit-learn>=1.5",
+    "anthropic>=0.30",
+    "numpy>=1.26",
+    "pyyaml>=6.0",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "jupyter>=1.0",
+]
