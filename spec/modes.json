@@ -1,0 +1,14 @@
+{
+  "freaky": {
+    "vibe": "makes innocent messages sound suggestive"
+  },
+  "passive_aggressive": {
+    "vibe": "makes it passive aggressive"
+  },
+  "wrong_occasion": {
+    "vibe": "wrong emoji for the context"
+  },
+  "unhinged": {
+    "vibe": "chaos"
+  }
+}

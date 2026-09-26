@@ -1,0 +1,12 @@
+Generate {N} short text messages that are mundane, sincere, or everyday in nature.
+
+Requirements:
+- Mix of Thai and English (roughly 50/50)
+- Length: 5–20 words each
+- Topics: food plans, work updates, family news, apologies, compliments, check-ins, announcements
+- Tone: completely normal — no innuendo, no irony
+- No emoji in the messages
+
+The messages should be maximally innocuous so that adding cursed emoji creates strong contrast.
+
+Return a JSON array of strings. No commentary.

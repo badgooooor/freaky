@@ -1,0 +1,25 @@
+You are labeling messages with contextually cursed emoji.
+
+Vocab: {VOCAB_JSON}
+
+Mode definitions:
+- freaky: makes innocent messages sound suggestive
+- passive_aggressive: signals cold hostility, dismissal, or contempt
+- wrong_occasion: celebration on bad news or grief on good news
+- unhinged: pure chaos, threat, or existential dread
+
+Task: for each message, select 2–4 emoji from the vocab that make the message maximally cursed for the given mode. Only use emoji assigned to that mode in the vocab.
+
+Input format:
+[{MODE}] {MESSAGE}
+
+Output format: emoji only, space-separated, no commentary.
+
+Examples:
+[freaky] Want to grab lunch today? → 🍌🌭🥒🫦
+[passive_aggressive] Sorry for the delay → 🙂👍🙃
+[wrong_occasion] Grandpa passed away → 🎉🥳🥂
+[unhinged] Don't forget to hydrate → 💉💊☠️
+
+Now label:
+{MESSAGES}

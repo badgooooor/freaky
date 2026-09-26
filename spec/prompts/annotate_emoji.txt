@@ -1,0 +1,21 @@
+You are annotating emoji for a vocabulary used to label messages with contextually cursed emoji.
+
+For each emoji, produce a JSON object with these fields:
+- emoji: the emoji character
+- name: canonical English name
+- literal: one sentence describing what it literally depicts
+- connotations: array of strings — cultural, slang, or contextual meanings that make it potentially cursed
+- cursed_when: one sentence — what message contexts make it land wrong
+- intensity: integer 1–3 (1 = subtle/contextual, 2 = medium, 3 = loud/explicit/unavoidable)
+- modes: array — subset of ["freaky", "passive_aggressive", "wrong_occasion", "unhinged"]
+
+Mode definitions:
+- freaky: makes innocent messages sound suggestive
+- passive_aggressive: signals cold hostility, dismissal, or contempt
+- wrong_occasion: celebration emoji on bad news, or vice versa
+- unhinged: pure chaos, threat, or existential dread
+
+Annotate the following emoji:
+{EMOJI_LIST}
+
+Return a JSON array. One object per emoji. No commentary.
