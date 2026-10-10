@@ -74,6 +74,7 @@ def main() -> None:
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_ID,
         torch_dtype=torch.float16,
+        device_map={"": "mps"},
     )
     model.config.use_cache = False
 
@@ -91,18 +92,19 @@ def main() -> None:
 
     training_args = SFTConfig(
         output_dir=str(OUTPUT_DIR),
-        num_train_epochs=10,
+        num_train_epochs=4,
         per_device_train_batch_size=4,
         gradient_accumulation_steps=4,
         learning_rate=2e-4,
-        fp16=True,
+        fp16=False,
+        bf16=False,
+        use_mps_device=True,
         eval_strategy="epoch",
         save_strategy="epoch",
         load_best_model_at_end=True,
         logging_steps=10,
         dataset_text_field="text",
         max_length=256,
-        loss_type="nll",
     )
 
     trainer = SFTTrainer(
