@@ -12,6 +12,7 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 INPUTS = [
     DATA_DIR / "pilot" / "pilot.jsonl",
     DATA_DIR / "pilot" / "batch2.jsonl",
+    DATA_DIR / "synthetic_v1.jsonl",
 ]
 OUT_DIR = DATA_DIR / "splits"
 
