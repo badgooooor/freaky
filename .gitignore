@@ -29,3 +29,6 @@ checkpoints/
 # IDE
 .vscode/
 .idea/
+
+# Model output
+output
