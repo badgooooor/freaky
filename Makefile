@@ -1,4 +1,6 @@
-.PHONY: prep train merge serve all clean
+.PHONY: prep train merge serve eval publish all clean
+
+HF_REPO ?= philavery-b/freaky
 
 PYTHON  := uv run
 SPLITS  := data/splits/train.jsonl
@@ -30,6 +32,12 @@ $(MERGED): $(ADAPTER)
 
 serve:
 	$(PYTHON) -m uvicorn src.serve:app --host 0.0.0.0 --port 8000 --reload
+
+eval:
+	$(PYTHON) scripts/eval.py
+
+publish:
+	$(PYTHON) scripts/publish.py $(HF_REPO)
 
 # ── housekeeping ──────────────────────────────────────────────────────────────
 
