@@ -1,8 +1,10 @@
 # freaky 🫦🔥
 
-Cursed emoji classifier. Takes a chat message, returns emoji that make it worse.
+Provocative and cursed emoji classifier. Takes a chat message, returns emoji that make it worse.
 
-Parody of [Desert Ant Labs' Emo](https://desertant.com/models/emo/). Built for Stupid Hackathon X (Oct 10–11 2026, Bangkok).
+Built for Stupid Hackathon X (Oct 10–11 2026, Bangkok).
+
+**Model:** [philavery-b/freaky](https://huggingface.co/philavery-b/freaky)
 
 **Example:** `[freaky] กินข้าวกันมั้ย` → 🍜🫦🔥
 
@@ -17,39 +19,42 @@ Parody of [Desert Ant Labs' Emo](https://desertant.com/models/emo/). Built for S
 
 ## Architecture
 
-Two-stream classifier (mirrors Emo's design, on purpose):
+LoRA fine-tune on `Qwen/Qwen2.5-1.5B-Instruct`.
 
-- **Stream A:** hashed char n-grams (2–4) → MLP. Works standalone, no heavy deps.
-- **Stream B:** frozen `intfloat/multilingual-e5-small` → small head.
-- **Fusion:** concat A+B → linear → sigmoid over ~100-emoji vocab.
-
-Thai + English, 50/50. Input: `[mode] message`.
+- Input: `[mode] message` (Thai + English)
+- Output: 2–4 emoji from mode-specific vocab pool
+- Adapter: r=16, targets q/k/v/o projections
+- Trained on ~600 examples (pilot + synthetic), 2 epochs
 
 ## Repo Layout
 
 ```
-spec/        SPEC.md, vocab.json
-data/        raw/, processed/, splits/, handwritten_test.jsonl
-scripts/     generate_messages.py, label_messages.py, clean.py, split.py
-src/         features.py, model.py, train.py, decode.py
-eval/        baseline.py, evaluate.py, ablation.py, human_eval_export.py
-notebooks/   exploration + results
-docs/        model card drafts, context dump
+spec/        vocab.v1.json
+data/        pilot/, splits/, handwritten_test.jsonl, synthetic_v1.jsonl
+scripts/     prep_data.py, merge_lora.py, eval.py, publish.py
+src/         train.py, serve.py, infer.py
+web/         demo UI
+docs/        pipeline plan, model card drafts
 ```
 
-## Evaluation
+## Pipeline
 
-Ablation table (baseline vs A vs B vs A+B) is the README centerpiece.
-Metrics: precision@3, recall@3 — overall, per mode, per language.
-Joke metrics (Ruin@3, HR Complaint Rate) go in the demo/model card only.
+```bash
+make prep     # flatten + split data → data/splits/
+make train    # LoRA fine-tune → output/lora-adapter/
+make merge    # merge adapter into base → output/merged/
+make serve    # FastAPI server on :8000
+make eval     # run eval against handwritten_test.jsonl
+make publish  # push to HF (philavery-b/freaky)
+```
 
 ## Stack
 
-Python 3.11 · uv · PyTorch · sentence-transformers · scikit-learn · Anthropic API
+Python 3.11 · uv · PyTorch · transformers · peft · trl · FastAPI
 
 ## Setup
 
 ```bash
 uv sync
-export ANTHROPIC_API_KEY=...
+uv run src/infer.py --mode freaky "กินข้าวกันมั้ย"
 ```
